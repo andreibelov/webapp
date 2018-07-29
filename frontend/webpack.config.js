@@ -6,6 +6,8 @@ const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 
+
+// Evaluating variables
 const fs = require('fs');
 const resolveApp = relativePath => path.resolve(fs.realpathSync(process.cwd()), relativePath);
 
@@ -19,12 +21,6 @@ const PATHS = {
     publicUrl: '',
     staticContent: resolveApp('public')
 };
-
-let seed;
-const jsonfile = require('jsonfile');
-jsonfile.readFile(PATHS.staticContent, function(err, obj) {
-    seed = obj;
-});
 
 // Grab NODE_ENV and REACT_APP_* environment variables and prepare them to be
 // injected into the application via DefinePlugin in Webpack configuration.
@@ -136,7 +132,7 @@ module.exports = {
         }),
         new ManifestPlugin({
             publicPath: PATHS.publicPath,
-            seed: seed
+            seed: JSON.parse(fs.readFileSync(PATHS.staticContent + '/manifest.json', "utf8"))
         }),
         new webpack.NoEmitOnErrorsPlugin(),
         // Add module names to factory functions so they appear in browser profiler.
