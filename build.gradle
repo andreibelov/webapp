@@ -1,0 +1,15 @@
+buildscript {
+    buildscript {
+        repositories {
+            mavenLocal()
+            maven { url 'https://plugins.gradle.org/m2/' }
+            jcenter()
+        }
+    }
+}
+
+subprojects {
+    apply plugin: 'idea'
+    group 'net.bootlab'
+    version = "0.1.0"
+}

@@ -1,0 +1,64 @@
+
+buildscript {
+    ext {
+        springBootVersion = '2.0.3.RELEASE'
+    }
+    repositories {
+        mavenLocal()
+        maven { url 'https://plugins.gradle.org/m2/' }
+        jcenter()
+    }
+    dependencies {
+        classpath 'io.spring.gradle:dependency-management-plugin:1.0.5.RELEASE'
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    jcenter()
+}
+
+configurations {
+    dev
+}
+
+dependencies {
+    compile 'joda-time:joda-time:2.8.2',
+            'commons-io:commons-io:2.4',
+            'org.springframework.boot:spring-boot-starter-web',
+            'org.springframework.boot:spring-boot-starter-mail',
+            'org.springframework.boot:spring-boot-autoconfigure',
+            'org.springframework.boot:spring-boot-starter-logging',
+            'org.springframework.boot:spring-boot-starter-data-jpa',
+//            'org.springframework.boot:spring-boot-starter-thymeleaf',
+            'org.springframework:spring-jdbc',
+            /*Swagger*/
+            'io.springfox:springfox-swagger2:2.8.0',
+            'io.springfox:springfox-swagger-ui:2.8.0',
+            'io.springfox:springfox-data-rest:2.8.0',
+            /*Formatter*/
+            'javax.xml.bind:jaxb-api:2.3.0',
+            'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.4',
+            /*HikariCP*/
+            'com.zaxxer:HikariCP:2.3.2',
+            /*DataBase*/
+            'com.h2database:h2:1.4.187'
+
+    compileOnly 'org.projectlombok:lombok:1.16.22'
+    annotationProcessor 'org.projectlombok:lombok:1.16.22'
+    compile 'org.springframework.boot:spring-boot-devtools'
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+}
+//https://stackoverflow.com/questions/31512195/does-gradle-continuous-build-support-springboot
+bootRun {
+    jvmArgs = ["-Dspring.output.ansi.enabled=ALWAYS"]
+    classpath = sourceSets.main.runtimeClasspath + configurations.dev
+}
