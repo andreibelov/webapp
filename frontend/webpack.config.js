@@ -49,6 +49,7 @@ const env = {
 module.exports = {
     // Don't attempt to continue if there are any errors.
     bail: true,
+    context: __dirname,
     devtool: 'source-map',
     entry: [
         // Include an alternative client for WebpackDevServer. A client's job is to
@@ -139,5 +140,16 @@ module.exports = {
         new webpack.NamedModulesPlugin(),
         // This is necessary to emit hot updates (currently CSS only):
         new webpack.HotModuleReplacementPlugin()
-    ]
+    ],
+    devServer: {
+        proxy: {
+            '/api': {
+                target: 'http://localhost:8081/',
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/api': ''
+                }
+            }
+        }
+    }
 };
