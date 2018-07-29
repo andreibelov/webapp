@@ -11,7 +11,7 @@ class EmployeeTable extends Component {
             <table className="table table-striped table-dark">
                 <thead>
                 <tr>
-                    <th>Name</th><th>Age</th><th>Years</th>
+                    <th>First Name</th><th>Last Name</th><th>Description</th>
                 </tr>
                 </thead>
                 <tbody>{rows}</tbody>

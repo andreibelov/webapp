@@ -1,18 +1,24 @@
-import React, { Component } from 'react';
 import './App.scss';
-
+import React, { Component } from 'react';
 import EmployeeTable from "./Employee/EmployeeTable";
 
-const EMPLOYEES = [
-    {name: 'Joe Biden', age: 45, years: 5},
-    {name: 'President Obama', age: 54, years: 8},
-    {name: 'Crystal Mac', age: 34, years: 12},
-    {name: 'James Henry', age: 33, years: 2}
-];
+const client = require('../api/client');
 
 class App extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {employees: []};
+    }
+
+    componentDidMount() {
+        client({method: 'GET', path: '/api/v2/employees'}).done(response => {
+            this.setState({employees: response.entity._embedded.employees});
+        });
+    }
+
     render() {
-        return (<EmployeeTable employees={EMPLOYEES}/>);
+        return (<EmployeeTable employees={this.state.employees}/>);
     }
 }
 

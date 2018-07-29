@@ -141,10 +141,17 @@ module.exports = {
         // This is necessary to emit hot updates (currently CSS only):
         new webpack.HotModuleReplacementPlugin()
     ],
+    //https://webpack.js.org/configuration/dev-server/
     devServer: {
+        open: true,
+        host: '127.0.0.1',
+        port: 8080,
+        headers: {
+            'X-Custom-Foo': 'bar'
+        },
         proxy: {
             '/api': {
-                target: 'http://localhost:8081/',
+                target: 'http://localhost:8081/api',
                 changeOrigin: true,
                 pathRewrite: {
                     '^/api': ''

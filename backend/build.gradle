@@ -37,6 +37,7 @@ dependencies {
             'org.springframework.boot:spring-boot-starter-mail',
             'org.springframework.boot:spring-boot-autoconfigure',
             'org.springframework.boot:spring-boot-starter-logging',
+            'org.springframework.boot:spring-boot-starter-actuator',
             'org.springframework.boot:spring-boot-starter-data-jpa',
 //            'org.springframework.boot:spring-boot-starter-thymeleaf',
             'org.springframework:spring-jdbc',
@@ -48,10 +49,10 @@ dependencies {
             'javax.xml.bind:jaxb-api:2.3.0',
             'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.4',
             /*HikariCP*/
-            'com.zaxxer:HikariCP:2.3.2',
+            'com.zaxxer:HikariCP:3.2.0',
+            'io.micrometer:micrometer-core:latest.integration',
             /*DataBase*/
             'com.h2database:h2:1.4.187'
-
     compileOnly 'org.projectlombok:lombok:1.16.22'
     annotationProcessor 'org.projectlombok:lombok:1.16.22'
     compile 'org.springframework.boot:spring-boot-devtools'
